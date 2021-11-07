@@ -8,3 +8,4 @@ if __name__ == '__main__':
     arr.sort()
     print(arr[-2])
 
+
