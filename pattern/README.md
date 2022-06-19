@@ -42,6 +42,7 @@ Print these patterns using loops:
        ***
       ****
      *****
+     
 7.   *****
       ****
        ***
@@ -53,6 +54,7 @@ Print these patterns using loops:
       *****
      *******
     *********
+    
 9.  *********
      *******
       *****
