@@ -1,1 +1,1 @@
-# CompetitiveProgramming
+# DATA STRUCTURES AND ALGORITHMS IN PYTHON 3
