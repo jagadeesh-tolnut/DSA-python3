@@ -5,6 +5,7 @@ class Queue:
         self.size = 0
     def __len__(self):
         return self.size
+        
     def is_empty(self):
         return self.size==0
 
