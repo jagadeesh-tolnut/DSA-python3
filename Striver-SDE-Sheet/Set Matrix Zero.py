@@ -1,6 +1,3 @@
-import copy
-
-
 row = int(input())
 mat = []
 
@@ -10,7 +7,8 @@ for i in range(row):
 
 col = len(mat[0])
 
-new_mat = copy.deepcopy(mat)
+new_mat = [item.copy() for item in mat]
+
 for i in range(row):
     for j in range(col):
         if mat[i][j] == 0:
