@@ -5,3 +5,9 @@ for i in range(len(no_dup),len(l)):
 
 print(*no_dup,sep=",")
 
+'''
+
+0,0,1,1,1,2,2,3,3,4
+0,1,2,3,4,_,_,_,_,_
+
+'''
