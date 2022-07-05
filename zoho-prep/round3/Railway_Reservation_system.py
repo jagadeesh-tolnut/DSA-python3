@@ -1,65 +1,60 @@
 class TicketBook():
     upper_berth = 2
+    upper_list = []
     mid_berth = 2
+    mid_list = []
     low_berth = 2
+    low_list = []
     rac = 2
     rac_queue = []
     wait = 2
     wait_queue = []
 
-    def bookTicket(self, pref):
+    def bookTicket(self, id, pref):
         if TicketBook.availabeTickets():
             if self.isTicketAvailable(pref):
                 if pref == 1:
-                    TicketBook.upper_berth -= 1
-                    print("Upper Berth Booked")
+                    self.bookUpperBerth(id)
                 elif pref == 2:
-                    TicketBook.mid_berth -= 1
-                    print("Mid Berth Booked")
+                    self.bookMidBerth(id)
                 elif pref == 3:
-                    TicketBook.low_berth -= 1
-                    print("Lower Berth Booked")
+                    self.bookLowBerth(id)
 
             else:
                 if pref == 1:
                     if self.isTicketAvailable(2):
-                        TicketBook.mid_berth -= 1
-                        print("Mid Berth Booked")
+                        self.bookMidBerth(id)
+
                     elif self.isTicketAvailable(3):
-                        TicketBook.low_berth -= 1
-                        print("Low Berth Booked")
+                        self.bookLowBerth(id)
+
                     else:
-                        if TicketBook.isRacAvailabe():
-                            TicketBook.rac -= 1
-                            print("RAC Booked")
-                        elif TicketBook.isWaitAvailable():
-                            TicketBook.wait -= 1
-                            print("Under Waiting list")
-                        else:
-                            print("No Tickets Available")
+                        self.bookRacOrWait()
 
                 elif pref == 2:
                     if self.isTicketAvailable(1):
-                        TicketBook.upper_berth -= 1
-                        print("Upper Berth Booked")
+                        self.bookUpperBerth(id)
+
                     elif self.isTicketAvailable(3):
-                        TicketBook.low_berth -= 1
-                        print("Lower Berth Booked")
+                        self.bookLowBerth(id)
                     else:
                         self.bookRacOrWait()
 
                 elif pref == 3:
                     if self.isTicketAvailable(2):
-                        TicketBook.mid_berth -= 2
-                        print("Mid Berth Booked")
+                        self.bookMidBerth(id)
+
                     elif self.isTicketAvailable(1):
-                        TicketBook.upper_berth -= 1
-                        print("Upper Berth Booked")
+                        self.bookUpperBerth(id)
+
                     else:
                         self.bookRacOrWait()
 
         else:
             self.bookRacOrWait()
+
+    def cancelTicket(self):
+
 
     @classmethod
     def anythingAvailable(cls):
@@ -89,6 +84,22 @@ class TicketBook():
             return True if TicketBook.low_berth > 0 else False
         else:
             return "UA"
+
+    def bookUpperBerth(self,id):
+        TicketBook.upper_list.append(id)
+        TicketBook.upper_berth -= 1
+        print("Upper Berth Booked")
+
+
+    def bookMidBerth(self,id):
+        TicketBook.mid_list.append(id)
+        TicketBook.mid_berth -= 1
+        print("Mid Berth Booked")
+
+    def bookLowBerth(self,id):
+        TicketBook.mid_list.append(id)
+        TicketBook.low_berth -= 1
+        print("Lower Berth Booked")
 
     def bookRacOrWait(self):
         if self.isRacAvailabe():
@@ -141,7 +152,7 @@ if __name__ == "__main__":
 
     def add_user():
         global customer_code
-        user_id = "U" + str(customer_code)
+        user_id = "P" + str(customer_code)
         if ticket.anythingAvailable():
             cus_name = input("Name: ")
             cus_age = int(input("Age: "))
@@ -154,6 +165,13 @@ if __name__ == "__main__":
 
         else:
             print("Ticket Not Available")
+
+    def cancel_user():
+        global customer_code
+        uid = input("Enter passenger id")
+
+
+
 
 
     while (code != 0):
@@ -172,10 +190,13 @@ if __name__ == "__main__":
                     add_user()
 
             case "2":
-                pass
+                no = int(input("Enter the number of Person: "))
+                for i in range(no):
+                    cancel_user()
             case "3":
                 print(customer_details)
             case "0":
                 break
+
             case default:
                 print("\n*** Enter a proper input ***\n")
