@@ -29,7 +29,7 @@ class TicketBook():
                         self.bookLowBerth(id)
 
                     else:
-                        self.bookRacOrWait()
+                        self.bookRacOrWait(id,pref)
 
                 elif pref == 2:
                     if self.isTicketAvailable(1):
@@ -38,7 +38,7 @@ class TicketBook():
                     elif self.isTicketAvailable(3):
                         self.bookLowBerth(id)
                     else:
-                        self.bookRacOrWait()
+                        self.bookRacOrWait(id,pref)
 
                 elif pref == 3:
                     if self.isTicketAvailable(2):
@@ -48,12 +48,31 @@ class TicketBook():
                         self.bookUpperBerth(id)
 
                     else:
-                        self.bookRacOrWait()
+                        self.bookRacOrWait(id, pref)
 
         else:
-            self.bookRacOrWait()
+            self.bookRacOrWait(id, pref)
 
-    def cancelTicket(self):
+    def cancelTicket(self,id):
+        if id in TicketBook.upper_list:
+            TicketBook.upper_list.remove(id)
+            TicketBook.upper_berth += 1
+
+
+        elif id in TicketBook.mid_list:
+            TicketBook.mid_list.remove(id)
+
+        elif id in TicketBook.low_list:
+            TicketBook.low_list.remove(id)
+
+        elif id in TicketBook.rac_queue:
+            TicketBook.rac_queue.remove(id)
+
+        elif id in TicketBook.wait_queue:
+            TicketBook.wait_queue.remove(id)
+
+        else:
+            print("No Tickets allotted for this passenger ID")
 
 
     @classmethod
@@ -85,31 +104,43 @@ class TicketBook():
         else:
             return "UA"
 
-    def bookUpperBerth(self,id):
+    def isInRac(self,id):
+        for i in TicketBook.rac_queue:
+            if id in i[0]:
+                return True
+            else:
+                return False
+
+
+    def bookUpperBerth(self, id):
         TicketBook.upper_list.append(id)
         TicketBook.upper_berth -= 1
         print("Upper Berth Booked")
 
-
-    def bookMidBerth(self,id):
+    def bookMidBerth(self, id):
         TicketBook.mid_list.append(id)
         TicketBook.mid_berth -= 1
         print("Mid Berth Booked")
 
-    def bookLowBerth(self,id):
+    def bookLowBerth(self, id):
         TicketBook.mid_list.append(id)
         TicketBook.low_berth -= 1
         print("Lower Berth Booked")
 
-    def bookRacOrWait(self):
+    def bookRacOrWait(self,id,pref):
         if self.isRacAvailabe():
             TicketBook.rac -= 1
+            TicketBook.rac_queue.append([id,pref])
             print("RAC Booked")
+
         elif self.isWaitAvailable():
             TicketBook.wait -= 1
+            TicketBook.rac_queue.append([id, pref])
             print("Under Waiting list")
+
         else:
             print("No Tickets Available")
+
 
     def isRacAvailabe(self):
         return True if TicketBook.rac > 0 else False
@@ -126,6 +157,7 @@ class Customer():
         self.age = age
         self.gender = gender
         self.berth = berth
+
         Customer.all.append(self)
 
 
@@ -166,12 +198,10 @@ if __name__ == "__main__":
         else:
             print("Ticket Not Available")
 
+
     def cancel_user():
-        global customer_code
+        # global customer_code
         uid = input("Enter passenger id")
-
-
-
 
 
     while (code != 0):
