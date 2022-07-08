@@ -33,8 +33,14 @@ def taxiCharge(pick, drop):
     else:
         return 100
 
-def allotingTaxi(pick):
-    pass
+def get_taxi_distances(pick):
+    avai_taxi_dis = {}
+    for i in TAXI:
+        if TAXI[i].free:
+            distance_from_customer = abs(MAP[TAXI[i].pos] - MAP[pick])
+            avai_taxi_dis.update({str(i):distance_from_customer})
+    return avai_taxi_dis
+
 
 def isTaxisAvailable():
     for i in TAXI:
@@ -47,7 +53,9 @@ def calcDistance(pick, drop):
     return abs(MAP[pick] - MAP[drop]) * DISTANCE
 
 
+
+
 if __name__ == "__main__":
     number_of_taxis = int(input("Enter the number of taxis: "))
     for i in range(1, number_of_taxis + 1):
-        TAXI["TAXI-" + str(i)] = Taxi(i)
+        TAXI[str(i)] = Taxi(i)
