@@ -186,8 +186,9 @@ if __name__ == "__main__":
             print("Ticket Not Available")
 
     def print_customer_details():
+        print("Name\tAge\tGender")
         for i in customer_details:
-            print(customer_details[i].name, customer_details[i].age, customer_details[i].gender)
+            print(f"{customer_details[i].name}\t{customer_details[i].age}\t{customer_details[i].gender}")
 
     def cancel_user():
         # global customer_code
