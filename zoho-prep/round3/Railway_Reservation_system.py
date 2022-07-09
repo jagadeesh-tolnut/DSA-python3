@@ -162,19 +162,6 @@ class Customer():
 
 
 if __name__ == "__main__":
-    # tick = TicketBook()
-    # tick.bookTicket(1)
-    # tick.bookTicket(1)
-    # tick.bookTicket(1)
-    # tick.bookTicket(1)
-    # tick.bookTicket(1)
-    # tick.bookTicket(1)
-    # tick.bookTicket(1)
-    # tick.bookTicket(1)
-    # tick.bookTicket(1)
-    # tick.bookTicket(1)
-    # tick.bookTicket(1)
-    # tick.bookTicket(1)
 
     ticket = TicketBook()
     customer_details = {}
@@ -191,13 +178,16 @@ if __name__ == "__main__":
             cus_gender = int(input("Gender(1-Male, 2-Female, 3-Transgender): "))
             cus_pref = int(input("Preference(1-Upper, 2-Middle, 3-Lower): "))
             customer_details[user_id] = Customer(cus_name, cus_age, cus_gender, cus_pref)
-            ticket.bookTicket(cus_pref)
+            ticket.bookTicket(user_id,cus_pref)
 
             customer_code += 1
 
         else:
             print("Ticket Not Available")
 
+    def print_customer_details():
+        for i in customer_details:
+            print(customer_details[i].name, customer_details[i].age, customer_details[i].gender)
 
     def cancel_user():
         # global customer_code
@@ -224,7 +214,7 @@ if __name__ == "__main__":
                 for i in range(no):
                     cancel_user()
             case "3":
-                print(customer_details)
+                print_customer_details()
             case "0":
                 break
 
