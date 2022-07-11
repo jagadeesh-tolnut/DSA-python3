@@ -94,6 +94,14 @@ class TicketBook():
     def availableWaitlist():
         return TicketBook.wait
 
+    def display_passengers(self):
+        print("Upper Berth - "+str(TicketBook.upper_berth))
+        print(*TicketBook.upper_list)
+        print("Upper Berth - " + str(TicketBook.mid_berth))
+        print(*TicketBook.mid_list)
+        print("Upper Berth - " + str(TicketBook.low_berth))
+        print(*TicketBook.low_list)
+
     def isTicketAvailable(self, pref):
         if pref == 1:
             return True if TicketBook.upper_berth > 0 else False
@@ -193,6 +201,7 @@ if __name__ == "__main__":
     def cancel_user():
         # global customer_code
         uid = input("Enter passenger id")
+        ticket.cancelTicket(uid)
 
 
     while (code != 0):
@@ -215,7 +224,8 @@ if __name__ == "__main__":
                 for i in range(no):
                     cancel_user()
             case "3":
-                print_customer_details()
+                # print_customer_details()
+                ticket.display_passengers()
             case "0":
                 break
 
